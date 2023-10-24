@@ -30,7 +30,7 @@ if  __name__ == '__main__' :
     X,Y = load_coffee_data();
     x_mean, x_std, x_norm = z_score(X)
 
-    parameters = train(x_norm, Y, [5, 5])
+    parameters = train(x_norm, Y, [5, 5], 1000)
 
     print("Write results to file...")
     with open('data/parameters.txt', 'w') as file :

@@ -112,10 +112,6 @@ def update_params(W: list, b: list, gradients: dict, learning_rate = 1.2):
     return {'W': new_W, 'b' : new_b}
 
 
-def create_network( layer_num = 1, unit_num = [3, 1]):
-    pass
-
-
 def train(X: np.ndarray, y: np.ndarray, n_unit: list, num_iteration=100, learning_rate=1.2, print_cost = True):
     '''
     Train the Network to predict y with input X, this will return W and b parameters that ready to use in prediction
@@ -194,42 +190,3 @@ def load_coffee_data():
         i += 1
 
     return (X, Y.reshape(-1,1))
-
-if  __name__ == '__main__' :
-    X,Y = load_coffee_data();
-
-    # W1_tmp = np.array( [[-8.93,  0.29, 12.9 ], [-0.1,  -7.32, 10.81]] )
-    # b1_tmp = np.array( [-9.82, -9.28,  0.96] )
-    # W2_tmp = np.array( [[-31.18], [-27.59], [-32.56]] )
-    # b2_tmp = np.array( [15.41] )
-
-    x_mean, x_std, x_norm = mc.z_score(X)
-
-    # W = [W1_tmp, W2_tmp]
-    # b = [b1_tmp, b2_tmp]
-
-    # X_tst = np.array([
-    #     [200,13.9],  # postive example
-    #     [200,17]])   # negative example
-    # X_tstn = mc.z_score(X_tst, x_mean, x_std)
-    # # print('x_test_normal = ',  X_tstn, 'dim = ', X_tstn.shape)  # remember to normalize
-    # predictions = predict(X_tstn, W, b)
-    # yhat = np.zeros_like(predictions)
-    # for i in range(len(predictions)):
-    #     if predictions[i] >= 0.5:
-    #         yhat[i] = 1
-    #     else:
-    #         yhat[i] = 0
-    # print(f"decisions = \n{predictions}")
-    # print("w1 = ", W[0], ", shape = ", W[0].shape)
-
-    parameters = train(x_norm, Y, 2, [5, 5], num_iteration=1000, learning_rate=1.1)
-    # for i in range(3) :
-    #     print("W", i+1, " = \n" + str(parameters["W"][i]))
-    #     print("b", i+1," = \n" + str(parameters["b"][i]))
-    X_tst = np.array([
-        [200,13.9],  # postive example
-        [200,17]])   # negative example
-    X_tstn = mc.z_score(X_tst, x_mean, x_std)
-    # print('x_test_normal = ',  X_tstn, 'dim = ', X_tstn.shape)  # remember to normalize
-    predictions = predict(X_tstn, parameters['W'], parameters['b'])
